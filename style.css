@@ -44,6 +44,11 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   font-family: Poppins, Arial, sans-serif;
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(128, 248, 174, 1) 0%,
+    rgba(223, 244, 148, 1) 90%
+  );
 }
 
 /* Remove list styles on ul, ol elements with a class attribute */
@@ -91,3 +96,87 @@ select {
 }
 
 /* CSS Reset end */
+
+body {
+  padding: 50px 10px;
+}
+
+.container {
+  padding: 35px;
+  background-color: #111;
+  color: #f1f1f1;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.top-content {
+  text-align: center;
+}
+
+.start-info {
+  margin-top: 10px;
+}
+
+.start-info span {
+  padding: 5px;
+  background-color: crimson;
+  border-radius: 3px;
+}
+
+.score-information {
+  margin: 40px 0 75px;
+  display: flex;
+  justify-content: center;
+}
+
+.score-information p {
+  font-family: Open sans, sans-serif;
+  background: linear-gradient(45deg, #131313, #2f2f2f);
+  color: #f1f1f1;
+  padding: 10px 5px;
+  border-radius: 5px;
+  min-width: 150px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.score-information p:nth-child(2) {
+  background: linear-gradient(45deg, #131313, #2f2f2f);
+}
+
+.score {
+  margin-left: 20px;
+}
+
+.text-to-test {
+  background-color: transparent;
+  border: 2px solid #333;
+  font-size: 30px;
+  color: #f1f1f1;
+  width: 100%;
+  min-height: 200px;
+  resize: none;
+  padding: 20px;
+  outline: none;
+}
+
+.text-to-test:focus {
+  border: 1px solid #6a6a6a;
+}
+
+.text-to-test.active {
+  border: 1px solid greenyellow;
+}
+
+.sentence-to-write {
+  margin: 40px 0 40px;
+  font-size: 25px;
+  min-width: 100px;
+  position: relative;
+}
+
+.sentence-to-write::before {
+  content: '➡️';
+  padding-right: 5px;
+}
