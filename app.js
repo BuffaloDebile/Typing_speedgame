@@ -35,5 +35,23 @@ window.addEventListener('keydown', handleStart);
 
 function handleStart(e) {
   if (e.key === 'Escape') {
+    time = 60;
+    score = 0;
+
+    timeDisplayed.classList.add('.active');
+    textAreaToTest.classList.add('.active');
+
+    timeDisplayed.textContent = `time: ${time}`;
+    scoreDisplayed.textContent = `Score: ${score}`;
+    textAreaToTest.value = '';
+
+    spansFromAPISentence.forEach((span) => (span.className = ''));
+
+    textAreaToTest.addEventListener('input', handleTyping);
+    textAreaToTest.focus();
   }
+}
+
+function handleTyping(e) {
+  const checkedSpans = checkSpans();
 }
