@@ -55,3 +55,26 @@ function handleStart(e) {
 function handleTyping(e) {
   const checkedSpans = checkSpans();
 }
+
+function checkSpans() {
+  const textAreaCharactersArray = textAreaToTest.value.split('');
+  let endOfGame = true;
+  let currentGoodLetters = 0;
+
+  for (let i = 0; i < spansFromAPISentence.length; i++) {
+    if (textAreaCharactersArray[i] === undefined) {
+      spansFromAPISentence[i].className = '';
+      endOfGame = false;
+    } else if (
+      textAreaCharactersArray[i] === spansFromAPISentence[i].textContent
+    ) {
+      spansFromAPISentence[i].classList.remove('wrong');
+      spansFromAPISentence[i].classList.add('correct');
+      currentGoodLetters++;
+    } else {
+      spansFromAPISentence[i].classList.add('wrong');
+      spansFromAPISentence[i].classList.remove('correct');
+      endOfGame = false;
+    }
+  }
+}
