@@ -28,7 +28,8 @@ async function getNewSentence() {
     textAreaToTest.value = '';
     locked = false;
   } catch (error) {
-    console.log(error);
+    sentence.textContent =
+      "Sorry something is not working, please check that you're online or try again later";
   }
 }
 
@@ -37,6 +38,11 @@ getNewSentence();
 window.addEventListener('keydown', handleStart);
 
 function handleStart(e) {
+  if (!sentence.textContent) {
+    sentence.textContent =
+      'Your internet connection is slow. Please wait for the sentence API data';
+  }
+
   if (e.key === 'Escape') {
     if (timerID) {
       clearInterval(timerID);
