@@ -26,6 +26,7 @@ async function getNewSentence() {
 
     spansFromAPISentence = sentence.querySelectorAll('.sentence-to-write span');
     textAreaToTest.value = '';
+    locked = false;
   } catch (error) {
     console.log(error);
   }
@@ -37,13 +38,18 @@ window.addEventListener('keydown', handleStart);
 
 function handleStart(e) {
   if (e.key === 'Escape') {
+    if (timerID) {
+      clearInterval(timerID);
+      timerID = undefined;
+    }
+
     time = 60;
     score = 0;
 
     timeDisplayed.classList.add('.active');
     textAreaToTest.classList.add('.active');
 
-    timeDisplayed.textContent = `time: ${time}`;
+    timeDisplayed.textContent = `Time: ${time}`;
     scoreDisplayed.textContent = `Score: ${score}`;
     textAreaToTest.value = '';
 
@@ -53,14 +59,17 @@ function handleStart(e) {
     textAreaToTest.focus();
   }
 }
-
+let locked = false;
 function handleTyping(e) {
+  if (locked) return;
+
   if (!timerID) {
     startTimer();
   }
 
   const sentenceCompleted = checkSpans();
   if (sentenceCompleted) {
+    locked = true;
     getNewSentence();
     score += spansFromAPISentence.length;
     scoreDisplayed.textContent = `score : ${score}`;
