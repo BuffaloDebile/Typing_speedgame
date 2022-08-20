@@ -46,8 +46,8 @@ function handleStart(e) {
     time = 60;
     score = 0;
 
-    timeDisplayed.classList.add('.active');
-    textAreaToTest.classList.add('.active');
+    timeDisplayed.classList.add('active');
+    textAreaToTest.classList.add('active');
 
     timeDisplayed.textContent = `Time: ${time}`;
     scoreDisplayed.textContent = `Score: ${score}`;

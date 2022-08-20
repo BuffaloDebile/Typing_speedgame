@@ -149,6 +149,38 @@ body {
   margin-left: 20px;
 }
 
+.time {
+  position: relative;
+  z-index: 1;
+}
+
+.time::before,
+.time::after {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+}
+
+.time.active::before {
+  background: linear-gradient(45deg, rgb(252, 139, 26), red);
+  animation: fading 1s ease-in-out alternate infinite;
+}
+.time.active::after {
+  background: linear-gradient(45deg, rgb(87, 75, 253), rgb(19, 188, 70));
+  animation: fading 1s 1s ease-in-out alternate infinite;
+}
+
+@keyframes fading {
+  to {
+    opacity: 0;
+  }
+}
 .text-to-test {
   background-color: transparent;
   border: 2px solid #333;
