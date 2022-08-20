@@ -7,6 +7,7 @@ const scoreDisplayed = document.querySelector('.score');
 
 let time = 60;
 let score = 0;
+let timerID;
 
 async function getNewSentence() {
   try {
@@ -54,12 +55,36 @@ function handleStart(e) {
 }
 
 function handleTyping(e) {
-  const gameEnded = checkSpans();
-  if (gameEnded) {
+  if (!timerID) {
+    startTimer();
+  }
+
+  const sentenceCompleted = checkSpans();
+  if (sentenceCompleted) {
     getNewSentence();
     score += spansFromAPISentence.length;
     scoreDisplayed.textContent = `score : ${score}`;
   }
+}
+
+function startTimer() {
+  time--;
+  timeDisplayed.textContent = `Time: ${time}`;
+  timerID = setInterval(() => {
+    time--;
+    timeDisplayed.textContent = `Time: ${time}`;
+    if (time === 0) {
+      clearInterval(timerID);
+      timeDisplayed.classList.remove('active');
+      textAreaToTest.classList.remove('active');
+      const spansFromAPISentence = sentence.querySelectorAll('span');
+      spansFromAPISentence.forEach((span) =>
+        span.classList.contains('correct') ? score++ : '',
+      );
+      scoreDisplayed.textContent = `Score: ${score}`;
+      textAreaToTest.removeEventListener('input', handleTyping);
+    }
+  }, 1000);
 }
 
 function checkSpans() {
