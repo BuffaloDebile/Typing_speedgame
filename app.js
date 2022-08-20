@@ -24,6 +24,7 @@ async function getNewSentence() {
     });
 
     spansFromAPISentence = sentence.querySelectorAll('.sentence-to-write span');
+    textAreaToTest.value = '';
   } catch (error) {
     console.log(error);
   }
@@ -53,18 +54,23 @@ function handleStart(e) {
 }
 
 function handleTyping(e) {
-  const checkedSpans = checkSpans();
+  const gameEnded = checkSpans();
+  if (gameEnded) {
+    getNewSentence();
+    score += spansFromAPISentence.length;
+    scoreDisplayed.textContent = `score : ${score}`;
+  }
 }
 
 function checkSpans() {
   const textAreaCharactersArray = textAreaToTest.value.split('');
-  let endOfGame = true;
+  let sentenceCompleted = true;
   let currentGoodLetters = 0;
 
   for (let i = 0; i < spansFromAPISentence.length; i++) {
     if (textAreaCharactersArray[i] === undefined) {
       spansFromAPISentence[i].className = '';
-      endOfGame = false;
+      sentenceCompleted = false;
     } else if (
       textAreaCharactersArray[i] === spansFromAPISentence[i].textContent
     ) {
@@ -74,7 +80,11 @@ function checkSpans() {
     } else {
       spansFromAPISentence[i].classList.add('wrong');
       spansFromAPISentence[i].classList.remove('correct');
-      endOfGame = false;
+      sentenceCompleted = false;
     }
   }
+
+  scoreDisplayed.textContent = `Score : ${score + currentGoodLetters}`;
+
+  return sentenceCompleted;
 }
