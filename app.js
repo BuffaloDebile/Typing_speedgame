@@ -1,6 +1,6 @@
 const sentence = document.querySelector('.sentence-to-write');
 const textAreaToTest = document.querySelector('.text-to-test');
-const APIEndpoint = 'http://api.quotable.io/random';
+const APIEndpoint = 'https://api.quotable.io/random';
 let spansFromAPISentence;
 const timeDisplayed = document.querySelector('.time');
 const scoreDisplayed = document.querySelector('.score');
